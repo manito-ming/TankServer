@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间为当前目录-->
+<mapper namespace="org.dao.UserMapper">
+    <select id="findCustomer" parameterType="String"
+            resultType="org.pojo.User">
+        SELECT upasswd from player where
+        uid=#{uid}
+    </select>
+    <select id="findCustomer1" parameterType="String"
+            resultType="org.pojo.User">
+        SELECT * from player where
+        uid=#{uid}
+    </select>
+    <insert id="addCustomer" parameterType="org.pojo.User">
+        insert into player (uid,uname,upasswd,utel)values(#{uid},#{uname},#{upasswd},#{utel})
+    </insert>
+</mapper>
