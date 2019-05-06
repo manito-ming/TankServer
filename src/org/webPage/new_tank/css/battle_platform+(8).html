@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <title></title>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="../js/jquery-3.3.1.js"></script>
+    <script src="../js/jquery-ui.js"></script>
+    <script src="../js/phaser.min.js"></script>
+    <script src="../phaser/blob.js"></script>
+    <script src="../phaser/canvas-to-blob.js"></script>
+    <script src="../phaser/embed-local.js"></script>
+    <script src="../phaser/embed.js"></script>
+    <script src="../phaser/filesaver.js"></script>
+    <script src="../phaser/phaser.1.1.4.min.js"></script>
+    <script src="../phaser/phaser.1.1.5.min.js"></script>
+    <!--显示格子-->
+    <script src="../phaser/phaser.2.0.0.min.js"></script>
+
+    <script src="../phaser/phaser.2.0.1.min.js"></script>
+    <script src="../phaser/phaser.2.0.2.min.js"></script>
+    <script src="../phaser/phaser.2.0.3.min.js"></script>
+    <script src="../phaser/phaser.2.0.4.min.js"></script>
+    <script src="../phaser/phaser.2.0.5.min.js"></script>
+    <script src="../phaser/phaser.2.0.6.min.js"></script>
+    <script src="../phaser/phaser.2.0.7.min.js"></script>
+    <script src="../phaser/phaser.2.1.0.min.js"></script>
+    <script src="../phaser/phaser.2.1.1.min.js"></script>
+    <script src="../phaser/phaser.2.1.2.min.js"></script>
+    <script src="../phaser/phaser.2.1.1.min.js"></script>
+    <script src="../phaser/phaser.2.2.2.box2d.min.js"></script>
+    <script src="../phaser/phaser.2.2.2.min.js"></script>
+    <script src="../phaser/phaser.2.3.0.min.js"></script>
+    <script src="../phaser/phaser.2.3.1.virtual-joystick.min.js"></script>
+    <script src="../phaser/phaser.2.4.0.js"></script>
+    <script src="../phaser/phaser.2.4.1.min.js"></script>
+    <script src="../phaser/phaser.2.4.3.min.js"></script>
+    <script src="../phaser/phaser.2.4.4.min.js"></script>
+    <script src="../phaser/phaser.2.4.4.particlestorm.min.js"></script>
+    <script src="../phaser/phaser.2.4.5.min.js"></script>
+    <script src="../phaser/phaser.2.4.5.ninja-physics.min.js"></script>
+    <script src="../phaser/phaser.2.4.6.min.js"></script>
+    <script src="../phaser/phaser.2.4.7.complete.min.js"></script>
+    <script src="../phaser/phaser.2.4.7.min.js"></script>
+    <script src="../phaser/phaser.2.4.8.min.js"></script>
+    <script src="../phaser/phaser.2.4.9.min.js"></script>
+    <script src="../phaser/phaser.2.5.0.min.js"></script>
+    <script src="../phaser/phaser.2.6.0.min.js"></script>
+    <script src="../phaser/phaser.2.6.1.min.js"></script>
+    <script src="../phaser/phaser.2.6.2.min.js"></script>
+    <script src="../phaser/phaser.2.7.0.beta2.min.js"></script>
+    <script src="../phaser/phaser.2.7.0.js"></script>
+    <script src="../phaser/phaser.2.7.0.min.js"></script>
+    <script src="../phaser/phaser.2.7.1.min.js"></script>
+    <script src="../phaser/phaser.2.7.2.min.js"></script>
+    <script src="../phaser/phaser.2.7.3.min.js"></script>
+    <script src="../phaser/phaser.2.7.4.min.js"></script>
+    <script src="../phaser/phaser.2.7.5.min.js"></script>
+    <script src="../phaser/phaser.2.7.6.min.js"></script>
+    <script src="../phaser/phaser.2.7.7.min.js"></script>
+    <script src="../phaser/phaser.map"></script>
+    <style type="text/css">
+
+        body{
+            /*width: 100%;*/
+            /*height: 100%;*/
+            /*!*background-image: url("../tank_2.jpg");*!*/
+            /*!*background-image: url("../image/tank01.jpeg");*!*/
+            /*background-repeat: no-repeat;*/
+            /*background-position: center;*/
+            /*background-size: cover;*/
+
+        }
+        html{
+            width: 100%;
+            height: 100%;
+        }
+        canvas{
+            width: 80%;
+            height: 60%;
+        }
+        /*.board {*/
+        /*width: 90%;*/
+        /*height: 90%;*/
+        /*position: relative;*/
+        /*left: 50%;*/
+        /*top: 50%;*/
+        /*margin-left: -46%;*/
+        /*margin-top: -27%;*/
+        /*line-height: 150px;*/
+        /*text-align: center;*/
+        /*!* @Key 透明度 R G B Alpha（不透明度为50%） *!*/
+        /*background-color: rgba(39, 71, 94, 0.73);*/
+        /*!* @Key 圆角矩形 *!*/
+        /*-moz-border-radius: 1em;*/
+        /*-webkit-border-radius: 1em;*/
+        /*border-radius: 1em;*/
+        /*!* @Key 投影 投影偏移3px，宽6px，颜色#666 *!*/
+        /*-webkit-box-shadow: 3px 3px 50px #79a6cc;*/
+        /*-moz-box-shadow: 3px 3px 50px #79a6cc;*/
+        /*box-shadow: 3px 3px 50px #79a6cc;*/
+        /*}*/
+    </style>
+    <script>
+        moldx=20;
+        moldy=30;
+
+
+        moldex=800;
+        moldey=100;
+
+
+        var enemy_velocityFromRotation;
+
+        //自加障碍
+        Barrier = function(index,game){
+            //障碍物位
+
+            moldx+=140;
+            moldy+=80;
+
+            var x=game.world.positionX = moldx;
+            var y=game.world.positionY = moldy;
+            // var x = game.world.randomX;
+            // var y = game.world.randomY;
+            // x = game.world.centerX;
+            // y = game.world.centerY;
+
+            //sprite(x,y,key,frame,group)：
+            // 返回Phaser.Sprite对象，在坐标（x，y）处创建一个sprite对象，
+            // x和y是相对于父元素的坐标值（number）
+            // ，key值为字符串、Phaser.RenderTexture、Phaser.BitmapData、Phaser.Video或PIXI.Texture，
+            // frame为指定的frame id或frame name，group指该对象添加的群组，没有指定时添加至World group
+            this.game = game;
+            // this.player = player;
+            // this.shadow = game.add.sprite(x, y, 'barrier', 'shadow');
+            this.barrier = game.add.sprite(x, y, 'barrier', 'barrier1');
+            // this.shadow.anchor.set(0.5);
+            this.barrier.anchor.set(0.5);
+            this.barrier.name = index.toString();
+            game.physics.enable(this.barrier, Phaser.Physics.ARCADE);
+            this.barrier.body.immovable = true;
+            this.barrier.body.collideWorldBounds = true;
+            // this.barrier.body.bounce.setTo(1, 1);
+
+            game.physics.arcade.overlap(bullets,barriers, bulletHitBarrier, null, this);
+        };
+
+        EnemyTank = function (index, game, player, bullets) {
+
+            // var x = game.world.centerX;
+            // var y = game.world.centerY;
+
+            var x=game.world.positionX = moldex;
+            var y=game.world.positionY = moldey;
+
+            this.game = game;
+            this.health = 100;
+            this.player = player;
+            this.bullets = bullets;
+            this.fireRate = 1000;
+            this.nextFire = 0;
+            this.alive = true;
+
+            this.shadow = game.add.sprite(x, y, 'enemy', 'shadow');
+            this.tank = game.add.sprite(x, y, 'enemy', 'tank1');
+            this.turret = game.add.sprite(x, y, 'enemy', 'turret');
+
+            this.shadow.anchor.set(0.5);
+            this.tank.anchor.set(0.5);
+            this.turret.anchor.set(0.3, 0.5);
+
+            this.tank.name = index.toString();
+            game.physics.enable(this.tank, Phaser.Physics.ARCADE);
+            this.tank.body.immovable = false;
+            this.tank.body.drag.set(0.2);
+            this.tank.body.maxVelocity.setTo(400,400);
+            this.tank.body.collideWorldBounds = true;
+            //敌方坦克碰撞边界
+            this.tank.body.onWorldBounds = new Phaser.Signal();
+            // 不起作用
+            this.tank.body.onWorldBounds.add(enemyHitWorldBounds, this);
+            // this.tank.body.bounce.setTo(1, 1);
+            // this.tank.body.bounce.setTo(0, 0);
+
+            // this.tank.angle = 180;
+            this.tank.angle = 90;
+            // this.tank.angle=game.rnd.angle();
+            // this.tank.angle=0;
+
+            EnemyTank.health = this.health;
+            EnemyTank.alive = this.alive;
+            EnemyTank.bullets = this.bullets;
+            EnemyTank.shadow = this.shadow;
+            EnemyTank.tank = this.tank;
+            EnemyTank.turret = this.turret;
+
+            EnemyTank.tank.angle=this.tank.angle;
+
+
+            // game.physics.arcade.velocityFromRotation(this.tank.rotation, 100, this.tank.body.velocity);
+            enemy_velocityFromRotation=game.physics.arcade.velocityFromRotation(this.tank.rotation, currentSpeed, this.tank.body.velocity);
+            //由于旋转（弧度）和速度计算速度并返回一个点对象，或将其设置为给定的点对象。
+            // 角度弧度。速度它会移动，每秒平方。在该点对象中，该点的属性将被设置为计算速度。
+        };
+
+        function enemyTankDamage(){
+            EnemyTank.health -=1;
+            if (EnemyTank.health <= 0) {
+                EnemyTank.alive = false;
+                EnemyTank.shadow.kill();
+                EnemyTank.tank.kill();
+                EnemyTank.turret.kill();
+
+                return true;
+            }
+            return false;
+        }
+
+        EnemyTank.prototype.update = function () {
+
+            this.shadow.x = this.tank.x;
+            this.shadow.y = this.tank.y;
+            this.shadow.rotation = this.tank.rotation;
+
+            this.turret.x = this.tank.x;
+            this.turret.y = this.tank.y;
+            this.turret.rotation = this.game.physics.arcade.angleBetween(this.tank, this.player);
+
+            if (EnemyTank.alive === true && tank.alive === true) {
+                if (this.game.physics.arcade.distanceBetween(this.tank, this.player) < 800) {
+
+                    if (this.game.time.now > this.nextFire && this.bullets.countDead() > 0) {
+                        this.nextFire = this.game.time.now + this.fireRate;
+
+                        var bullet = this.bullets.getFirstDead();
+
+                        bullet.reset(this.turret.x, this.turret.y);
+
+                        bullet.rotation = this.game.physics.arcade.moveToObject(bullet, this.player, 1000);
+                    }
+                }
+            }
+        };
+        // 创建了一个Phaser.Game对象的实例并赋值给本地变量game，以此来激活Phaser。
+        // new Phaser.Game(width, height, renderer, parent, state, transparent, antialias,physicsConfig);
+        // 前两个参数是Phaser要创建的canvas元素的宽高
+        // 第三个参数可以是Phaser.CANVAS，Phaser.WEBGL，或Phaser.AUTO。
+        // 推荐的参数是Phaser.AUTO，它会自动尝试使用WebGL，如果浏览器或设备不支持它就会回滚成Canvas。
+        // 第四个参数是一个空字符串，这个是你想插入Phaser创建的canvas元素的DOM元素的id。
+        // 最后一个参数是一个包含四个Phaser基本函数引用的对象。它们的用法在这里被详细解释。注意这个对象不是必需
+        var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', {
+            preload: preload,
+            create: create,
+            update: update,
+            render: render
+        });
+
+        function preload() {
+
+            game.load.atlas('tank', '../assets/games/tanks/tanks.png', '../assets/games/tanks/tanks.json');//我方坦克
+            game.load.atlas('enemy', '../assets/games/tanks/enemy-tanks.png', '../assets/games/tanks/tanks.json');//敌方坦克
+            // game.load.atlas('barrier', '../assets/games/tanks/dark_grass.png');//障碍物
+            game.load.atlas('barrier', '../assets/games/tanks/scorched_earth.png','../assets/games/tanks/barrier.json');//障碍物
+            game.load.image('logo', '../assets/games/tanks/logo.png');//tanklogo
+            game.load.image('bullet', '../assets/games/tanks/bullet.png');//子弹
+            game.load.image('earth', '../assets/games/tanks/dark_grass.png');//地图
+            game.load.spritesheet('kaboom', '../assets/games/tanks/explosion.png', 64, 64, 23);//爆炸图片
+        }
+
+        var land;
+        var shadow;
+        var tank;
+        var turret;//炮筒
+
+        var enemies;
+        var enemyBullets;
+        var enemiesTotal = 0;
+        var enemiesAlive = 0;
+        var explosions;
+
+        var logo;
+
+        var currentSpeed = 100;
+        var cursors;
+
+        var bullets;
+        var fireRate = 1000;
+        var nextFire = 0;
+
+        var barriers;
+        var barriersTotal;
+
+        var stateText;
+
+        //传值
+        var fire_choose=0;      // 开火 目前不改
+
+        var tankpath_choose=0;       //我方 坦克遇到 障碍 方向处理
+        var enemytankpath_choose=1;  //敌方 坦克遇到 障碍 方向处理
+
+        var tankpath_w_choose=3;        //我方 坦克遇到 边界 方向处理
+        var enemytankpath_w_choose=4;   //敌方 坦克遇到 边界 方向处理
+
+        var tank_meet_enemy_path_choose=1;   //我方 坦克遇到 敌方坦克 方向处理
+        var enemy_meet_tank_path_choose=2;   //敌方 坦克遇到 我方坦克 方向处理
+
+
+        //ajax
+        $(document).ready(function () {
+               // $.ajax({
+               //     type: "post",        // 通过 POST 读取的页面不被缓存
+               //     url: "",             //规定把请求发送到哪个 URL。
+               //     dataType: "json",
+               //     async: true,
+               //     success:function (fire_choose_msg)
+               //     {
+               //         var fire_ch=fire_choose_msg[''];
+               //         fire_choose=fire_ch;
+               //
+               //     }
+               // });
+               $.ajax({
+                   type: "post",        // 通过 POST 读取的页面不被缓存
+                   url: "",             //规定把请求发送到哪个 URL。
+                   dataType: "json",
+                   async: true,
+                   success:function (tankpath_choose_msg)
+                   {
+                       var tankpath_ch=tankpath_choose_msg[''];
+                       tankpath_choose=tankpath_ch;
+                       
+
+
+                   }
+               })
+        });
+
+
+        function create() {
+            //更新这个世界的大小和设置为给定的值world.x/y
+            //setBounds(x, y, width, height)
+
+            game.world.setBounds(0, 0, 800, 600);
+
+
+            land = game.add.tileSprite(0, 0, 800, 600, 'earth');
+
+            land.fixedToCamera = true;
+            // x,y
+            //数值型。可选。默认值为0。
+            //元素的x坐标。这个坐标是相对于元素可能在的任何父容器。
+
+            // key
+            // 字符串。可选。
+            // 通过这个对象渲染并显示的图像。如果是字符串类型，Phaser将会找到图片缓存的条目。
+
+            // frame
+            //字符串或数值类型。可选。
+            //如果引入的是纹理地图集或者是精灵图表，可以指定要使用的帧。使用帧ID的整数或者帧名称的字符串。
+
+            // group
+            //Phaser.Group。可选
+            //将对象添加到的组。如果没有指定，会被添加到world组。
+            tank = game.add.sprite(100, 200, 'tank', 'tank1');
+            tank.anchor.setTo(0.5, 0.5);//设置中心点
+
+            //add(name, frames, frameRate, loop, useNumericIndex)
+            // 添加一个新动画。
+            //name
+            // 字符串，必须。该精灵内动画的唯一名称。例如’run’ , ‘fire’ , ‘walk’
+            // frames
+            // 数组。可选。默认为null，表示使用所有帧。
+            // 一组数字或者字符串，与要添加到此动画的帧以及顺序相对应。例如[1, 2, 3]或者['run0', 'run1', 'run2']。
+            // frameRate
+            // 数字，可选。默认为60。
+            // 动画播放的速度，以每秒的帧数给出。
+            // loop
+            // 布尔值。可选。默认为false。
+            // 动画是否为循环播放。默认播放一次。
+            // useNumericIndex
+            // 布尔值。可选。默认为true
+            // 是否使用默认的数字索引或者字符串给定的帧。
+            tank.animations.add('move', ['tank1', 'tank2', 'tank3', 'tank4', 'tank5', 'tank6'], 20, true);
+
+            tank.health = 100;
+            tank.alive = true;
+
+            game.physics.enable(tank, Phaser.Physics.ARCADE);
+            //减速设置
+            tank.body.drag.set(0.2);
+            //最大速度设置
+            tank.body.maxVelocity.setTo(400, 400);
+
+            tank.body.collideWorldBounds = true;
+
+            //tank碰撞边界
+            tank.body.onWorldBounds = new Phaser.Signal();
+            tank.body.onWorldBounds.add(tankHitWorldBounds, this);
+
+
+            tank.body.bounce.setTo(1, 1);
+
+
+            turret = game.add.sprite(0, 0, 'tank', 'turret');
+
+            turret.anchor.setTo(0.3, 0.5);
+
+
+            enemyBullets = game.add.group();
+            // 布尔值。如果设置为true，这个group创建的或者加入进来的元素都将拥有一个可以启用的物理属性。
+            // 如果子元素在设置这个属性之前就已经存在了，子元素的物理属性将不会被改变。默认的body类型由physicsBodyType控制。
+            // 语法：object.enableBody = Boolean
+            // 其中object为游戏元素对象。
+            enemyBullets.enableBody = true;
+            enemyBullets.physicsBodyType = Phaser.Physics.ARCADE;
+            //createMultiple(quantity, key, frame, exists)：
+            // 返回一个Array对象，创建多个sprite对象并将其添加至group的顶部，
+            // quantity指sprite的数量，key指sprite的图片，
+            // frame指哪些帧应用于这些sprite，exists布尔值，默认false
+            enemyBullets.createMultiple(100, 'bullet');//一次敌方可以发射多少子弹
+            //setAll(key, value, checkAlive, checkVisible, operation, force)：
+            // 为该group所有的child设置新属性值，新属性值仅改变当前group的child，不会递归影响下一层child。
+            // key指属性，value指属性值，checkAlive布尔值，默认false，如果设置为true则只更新alive=true的child，
+            // checkVisible布尔值，默认false，如果设置为true则只更新visible=true的child，
+            // operation控制值如何改变，默认为0，即用新值替代，1相加，2相减，3相乘，4相除，force默认为false，如果值为true，则不管child属性是否存在，都将设置其值，false则不进行任何操作
+            enemyBullets.setAll('anchor.x', 0.5);
+            enemyBullets.setAll('anchor.y', 0.5);
+            enemyBullets.setAll('outOfBoundsKill', true);
+            enemyBullets.setAll('checkWorldBounds', true);
+
+
+
+            enemies = [];
+            //控制敌方坦克数量
+            enemiesTotal = 1;
+            enemiesAlive = 1;
+
+            for (var i = 0; i < enemiesTotal; i++) {
+                enemies.push(new EnemyTank(i, game, tank, enemyBullets));
+            }
+
+            barriers = [];
+            barriersTotal = 3;
+            //控制障碍物数量
+            for (var j = 0; j < barriersTotal; j++) {
+                barriers.push(new Barrier(j, game, barriers));
+            }
+
+
+            shadow = game.add.sprite(0, 0, 'tank', 'shadow');
+            shadow.anchor.setTo(0.5, 0.5);
+
+
+            bullets = game.add.group();
+            bullets.enableBody = true;
+            bullets.physicsBodyType = Phaser.Physics.ARCADE;
+            // 一次我可以发射多少子弹
+            bullets.createMultiple(30, 'bullet', 0, false);
+            bullets.setAll('anchor.x', 0.5);
+            bullets.setAll('anchor.y', 0.5);
+            bullets.setAll('outOfBoundsKill', true);
+            bullets.setAll('checkWorldBounds', true);
+
+            //爆炸
+            explosions = game.add.group();
+            for (var i = 0; i < 10; i++) {
+                var explosionAnimation = explosions.create(0, 0, 'kaboom', [0], false);
+                explosionAnimation.anchor.setTo(0.5, 0.5);
+                explosionAnimation.animations.add('kaboom');
+            }
+
+            tank.bringToTop();//bringToTop(child)：将child移至group最上面
+            turret.bringToTop();
+            //camera follow我的坦克
+            game.camera.follow(tank);
+            game.camera.deadzone = new Phaser.Rectangle(150, 150, 500, 300);
+            game.camera.focusOnXY(0, 0);
+            // createCursorKeys()：创建并返回一个包含上下左右四个热键的Phaser.key对象，该对象包含up、down、left和right属性
+            //键盘控制
+            cursors = game.input.keyboard.createCursorKeys();
+
+            stateText = game.add.text(game.world.centerX,game.world.centerY,' ', { font: '84px Arial', fill: '#fff' });
+            stateText.anchor.setTo(0.5, 0.5);
+            stateText.visible = false;
+        }
+
+        function damage() {
+            tank.health -= 1;
+            if (tank.health <= 0) {
+                tank.alive = false;
+                this.shadow.kill();
+                this.tank.kill();
+                this.turret.kill();
+
+                // this.bullets.kill();
+
+                return true;
+            }
+            return false;
+        }
+
+        function update() {
+            //碰撞检测方法：overlap 、collide
+            //与overlap不同的是，collide方法不仅会检测两个物体之间是否已经碰撞了
+            // game.physics.arcade.collide(tank, barriers[i].barrier);
+            // game.physics.arcade.collide(bullets,barriers, bulletHitBarrier, null, this);
+
+
+            //并且会产生碰撞的物理效果，而overlap方法则不会产生碰撞的物理效果
+            game.physics.arcade.overlap(enemyBullets, tank, enemyBulletsHitTank, null, this);
+
+
+
+            enemiesAlive = 0;
+            for (var i = 0; i < enemies.length; i++) {
+
+
+                if (enemies[i].alive || tank.alive) {
+                    enemiesAlive++;
+                    // game.physics.arcade.overlap(tank, enemies[i].tank,enemyHitTank,null,this);
+
+                    game.physics.arcade.collide(tank, enemies[i].tank,enemyHitTank,null,this);
+
+
+                    for (var j = 0; j < barriers.length; j++) {
+
+
+                        // game.physics.arcade.overlap(tank, barriers[j].barrier,tankHitBarrier(b),null,this);//tank 碰撞 障碍
+                        game.physics.arcade.overlap(bullets, barriers[j].barrier, bulletHitBarrier, null, this);//ok
+                        game.physics.arcade.overlap(bullets, enemies[i].tank, bulletHitEnemy, null, this);//ok
+                        game.physics.arcade.overlap(enemies[i].bullets, barriers[j].barrier, enemyBulletsHitBarrier,null, this);//ok
+                        // game.physics.arcade.overlap(enemies[i].tank, barriers[j].barrier,enemyHitBarrier(a),this,this);//enemytank 碰撞 障碍
+
+                        // tankhitbarrier=game.physics.arcade.overlap(tank, barriers[j].barrier,tankHitBarrier,null,this);//tank 碰撞 障碍
+                        // enemyhitbarrier=game.physics.arcade.overlap(enemies[i].tank, barriers[j].barrier, enemyHitBarrier, null, this);//enemytank 碰撞 障碍
+
+
+                        game.physics.arcade.collide(tank, barriers[j].barrier,tankHitBarrier,null,this);//tank 碰撞 障碍
+                        game.physics.arcade.collide(enemies[i].tank, barriers[j].barrier, enemyHitBarrier, null, this);//enemytank 碰撞 障碍
+
+                        // tankhitbarrier=game.physics.arcade.overlap(tank, barriers[j].barrier);//tank 碰撞 障碍
+                        // enemyhitbarrier= game.physics.arcade.overlap(enemies[i].tank, barriers[j].barrier);
+
+                        // tankhitbarrier=game.physics.arcade.collide(tank, barriers[j].barrier);//tank 碰撞 障碍
+                        // enemyhitbarrier= game.physics.arcade.collide(enemies[i].tank, barriers[j].barrier);
+
+
+                    }
+                    enemies[i].update();
+
+                }
+            }
+            // //左转右转
+            // if (cursors.left.isDown) {
+            //     tank.angle -= 4;
+            // }
+            // else if (cursors.right.isDown) {
+            //     tank.angle += 4;
+            // }
+            // var path_choose;
+            // switch (3){
+            //     case 0:
+            //         var round=1;
+            //         if (round>0){
+            //             tank.angle+=8;
+            //             currentSpeed = 300;
+            //         }
+            //         break;
+            //     case 1:
+            //         var round=1;
+            //         if (round>0){
+            //             tank.angle+=4;
+            //             currentSpeed = 300;
+            //         }
+            //         break;
+            //     case 2:{
+            //         var round=1;
+            //         if (round>0){
+            //             tank.angle-=1;
+            //             currentSpeed = 300;
+            //         }
+            //         break;
+            //         }
+            //     case 3:{
+            //         {
+            //             var round=1;
+            //             if (round>0){
+            //                 tank.angle-=0.3;
+            //                 currentSpeed = 300;
+            //             }
+            //             break;
+            //         }
+            //     }
+            //     case 4:
+            //         //未解之谜
+            //         if(game.physics.arcade.distanceBetween(this.tank,EnemyTank.tank) < 100){
+            //             if(tank.health>=3){
+            //                 var round=1;
+            //                 if (round>0){
+            //                     tank.angle-=1;
+            //                     currentSpeed = 100;
+            //                 }
+            //             }
+            //         }
+            //
+            //         break;
+            //
+            // }
+
+
+
+            // //直走
+            // if (cursors.up.isDown) {
+            //     //  The speed we'll travel at
+            //     currentSpeed = 300;
+            // }
+            // else {
+            //     if (currentSpeed > 0) {
+            //         currentSpeed -= 4;
+            //     }
+            // }
+
+
+            if (currentSpeed > 0) {
+                game.physics.arcade.velocityFromRotation(tank.rotation, currentSpeed, tank.body.velocity);
+                game.physics.arcade.velocityFromRotation(EnemyTank.tank.rotation, currentSpeed, EnemyTank.tank.body.velocity);
+            }
+            // game.physics.arcade.velocityFromRotation(tank.rotation, currentSpeed, tank.body.velocity);
+            land.tilePosition.x = -game.camera.x;
+            land.tilePosition.y = -game.camera.y;
+
+
+            shadow.x = tank.x;
+            shadow.y = tank.y;
+            shadow.rotation = tank.rotation;
+
+            turret.x = tank.x;
+            turret.y = tank.y;
+            //控制炮筒旋转
+            //angleToPointer(displayObject, pointer, world)：返回一个number对象，找到鼠标与display object间的一个角度
+            //鼠标控制我的炮筒方向
+            // turret.rotation = game.physics.arcade.angleToPointer(turret);
+            //炮筒方向跟着子弹方向
+            // turret.rotation= this.game.physics.arcade.angleBetween(tank, EnemyTank.tank);
+
+            //控制开炮
+            //
+            // if (game.input.activePointer.isDown) {
+            //     //  Boom!
+            //     fire();
+            // }
+            fire(fire_choose);
+
+            gameOver();
+
+
+
+
+
+        }
+
+        function gameOver() {
+
+            if(EnemyTank.health<=0){
+                stateText.text = "Game over";
+                stateText.visible = true;
+
+            }
+            else if(tank.health<=0){
+                stateText.text = "Game over";
+                stateText.visible = true;
+
+            }
+        }
+
+        // 子弹打在坦克上
+        function enemyBulletsHitTank(tank, bullet) {
+
+            bullet.kill();
+
+            var destroyed = damage();
+            if (destroyed) {
+                var explosionAnimation = explosions.getFirstExists(false);
+                explosionAnimation.reset(tank.x, tank.y);
+                explosionAnimation.play('kaboom', 30, false, true);
+            }
+
+        }
+
+        function bulletHitEnemy(tank, bullet) {
+
+            bullet.kill();
+            enemyTankDamage();
+
+            var destroyed = enemyTankDamage();
+
+            if (destroyed) {
+                var explosionAnimation = explosions.getFirstExists(false);
+                explosionAnimation.reset(tank.x, tank.y);
+                explosionAnimation.play('kaboom', 30, false, true);
+            }
+
+        }
+        //子弹打到障碍物上
+        function bulletHitBarrier(barrier, bullet) {
+            bullet.kill();
+        }
+        function enemyBulletsHitBarrier(barrier, bullet) {
+            bullet.kill();
+        }
+
+
+
+
+        //试错
+        // function enemyHitBarrier() {
+        //
+        //         // EnemyTank.tank=enemytank_path(enemytankpath_choose);
+        //     enemytank_path(enemytankpath_choose);
+        // }
+        //
+        // function enemyHitBarrier(enemytankpath_choose) {
+        //     var a=enemytankpath_choose;
+        //     // EnemyTank.tank=enemytank_path(enemytankpath_choose);
+        //     enemytank_path(a);
+        // }
+
+        // function tankHitBarrier(b) {
+        //     var tankpath_choose=b;
+        //     tank_path(tankpath_choose);
+        // }
+        // function enemyHitBarrier(a) {
+        //
+        //     var enemytankpath_choose=a;
+        //     currentSpeed=0;
+        //     enemytank_path(enemytankpath_choose);
+        //
+        // }
+
+        // function tankHitBarrier(b) {
+        //     var tankpath_choose=b;
+        //     if(tankhitbarrier){
+        //         tank_path(tankpath_choose);
+        //     }
+        // }
+        // function enemyHitBarrier() {
+        //
+        //   if(enemyhitbarrier){
+        //       enemytank_path(enemytankpath_choose);
+        //
+        //   }
+        // }
+        //
+
+
+
+        //坦克碰撞障碍
+        function tankHitBarrier() {
+            tank_path(tankpath_choose)
+        }
+        function enemyHitBarrier() {
+            enemytank_path(enemytankpath_choose)
+        }
+
+        //坦克碰撞边界
+        function tankHitWorldBounds() {
+            tank_w_path(tankpath_w_choose)
+        }
+        function enemyHitWorldBounds() {
+            enemytank_w_path(enemytankpath_w_choose)
+        }
+
+        //坦克碰撞坦克
+        function enemyHitTank() {
+            tank_meet_enemy_path(tank_meet_enemy_path_choose);
+            enemy_meet_tank_path(enemy_meet_tank_path_choose)
+        }
+
+
+
+
+
+        //我方坦克 碰撞 敌方坦克 怎么走
+        function tank_meet_enemy_path(tank_meet_enemy_path_choose) {
+            var p_t_m_e_choose=tank_meet_enemy_path_choose;
+            switch (p_t_m_e_choose){
+                case 0:
+                    // 顺时针旋转5度
+                    currentSpeed = 300;
+                    for(var i=0;i<1;i++){
+                        tank.angle+=5;
+                    }
+                    break;
+                case 1:
+                    // 逆时针旋转5度
+                    currentSpeed = 300;
+                    for(var i=0;i<1;i++){
+                        tank.angle-=5;
+                    }
+                    break;
+                case 2:
+                    // 反方向走
+                    currentSpeed = 300;
+                    for(var i=0;i<36;i++){
+                        tank.angle+=5;
+                    }
+                    break;
+                case 3:
+                    // 顺时针旋转90度
+                    currentSpeed = 300;
+                    for(var i=0;i<18;i++){
+                        tank.angle+=5;
+                    }
+                    break;
+                case 4:
+                    // 逆时针旋转90度
+                    currentSpeed = 300;
+                    for(var i=0;i<18;i++){
+                        tank.angle-=5;
+                    }
+                    break;
+            }
+
+        }
+
+
+        //敌方坦克 碰撞 我方坦克 怎么走
+        function enemy_meet_tank_path(enemy_meet_tank_path_choose) {
+            var p_e_m_t_choose=enemy_meet_tank_path_choose;
+            switch (p_e_m_t_choose){
+                case 0:
+                    // 顺时针旋转5度
+                    currentSpeed = 300;
+                    for(var i=0;i<1;i++){
+                        EnemyTank.tank.angle+=5;
+                    }
+                    break;
+                case 1:
+                    // 逆时针旋转5度
+                    currentSpeed = 300;
+                    for(var i=0;i<1;i++){
+                        EnemyTank.tank.angle-=5;
+                    }
+                    break;
+                case 2:
+                    // 反方向走
+                    currentSpeed = 300;
+                    for(var i=0;i<36;i++){
+                        EnemyTank.tank.angle+=5;
+                    }
+                    break;
+                case 3:
+                    // 顺时针旋转90度
+                    currentSpeed = 300;
+                    for(var i=0;i<18;i++){
+                        EnemyTank.tank.angle+=5;
+                    }
+                    break;
+                case 4:
+                    // 逆时针旋转90度
+                    currentSpeed = 300;
+                    for(var i=0;i<18;i++){
+                        EnemyTank.tank.angle-=5;
+                    }
+                    break;
+            }
+
+        }
+
+        //我方坦克碰撞 障碍 怎么走
+        function tank_path(tankpath_choose) {
+            var p_t_choose = tankpath_choose;
+            switch (p_t_choose){
+                case 0:
+                    // 顺时针旋转5度
+                    currentSpeed = 300;
+                    for(var i=0;i<1;i++){
+                        tank.angle+=5;
+                    }
+                    break;
+                case 1:
+                    // 逆时针旋转5度
+                    currentSpeed = 300;
+                    for(var i=0;i<1;i++){
+                        tank.angle-=5;
+                    }
+                    break;
+                case 2:
+                    // 反方向走
+                    currentSpeed = 300;
+                    for(var i=0;i<36;i++){
+                        tank.angle+=5;
+                    }
+                    break;
+                case 3:
+                    // 顺时针旋转90度
+                    currentSpeed = 300;
+                    for(var i=0;i<18;i++){
+                        tank.angle+=5;
+                    }
+                    break;
+                case 4:
+                    // 逆时针旋转90度
+                    currentSpeed = 300;
+                    for(var i=0;i<18;i++){
+                        tank.angle-=5;
+                    }
+                    break;
+
+            }
+
+        }
+
+        //敌方坦克碰撞 障碍 怎么走
+        function enemytank_path(enemytank_path_choose) {
+            var p_e_choose = enemytank_path_choose;
+            switch (p_e_choose){
+
+                case 0:
+                    // 顺时针旋转5度
+                    currentSpeed = 300;
+                    for(var i=0;i<1;i++){
+                        EnemyTank.tank.angle+=5;
+                    }
+                    break;
+                case 1:
+                    // 逆时针旋转5度
+                    currentSpeed = 300;
+                    for(var i=0;i<1;i++){
+                        EnemyTank.tank.angle-=5;
+                    }
+                    break;
+                case 2:
+                    // 反方向走
+                    currentSpeed = 300;
+                    for(var i=0;i<36;i++){
+                        EnemyTank.tank.angle+=5;
+                    }
+                    break;
+                case 3:
+                    // 顺时针旋转90度
+                    currentSpeed = 300;
+                    for(var i=0;i<18;i++){
+                        EnemyTank.tank.angle+=5;
+                    }
+                    break;
+                case 4:
+                    // 逆时针旋转90度
+                    currentSpeed = 300;
+                    for(var i=0;i<18;i++){
+                        EnemyTank.tank.angle-=5;
+                    }
+                    break;
+
+
+            }
+
+        }
+
+        //我方坦克碰撞 边界 怎么走
+        function tank_w_path(tankpath_w_choose) {
+            var p_t_w_choose = tankpath_w_choose;
+            switch (p_t_w_choose){
+                case 0:
+                    // 顺时针旋转5度
+                    currentSpeed = 300;
+                    for(var i=0;i<1;i++){
+                        tank.angle+=5;
+                    }
+                    break;
+                case 1:
+                    // 逆时针旋转5度
+                    currentSpeed = 300;
+                    for(var i=0;i<1;i++){
+                        tank.angle-=5;
+                    }
+                    break;
+                case 2:
+                    // 反方向走
+                    currentSpeed = 300;
+                    for(var i=0;i<36;i++){
+                        tank.angle+=5;
+                    }
+                    break;
+                case 3:
+                    // 顺时针旋转90度
+                    currentSpeed = 300;
+                    for(var i=0;i<18;i++){
+                        tank.angle+=5;
+                    }
+                    break;
+                case 4:
+                    // 逆时针旋转90度
+                    currentSpeed = 300;
+                    for(var i=0;i<18;i++){
+                        tank.angle-=5;
+                    }
+                    break;
+
+            }
+
+        }
+
+        //敌方坦克碰撞 边界 怎么走
+        function enemytank_w_path(enemytankpath_w_choose) {
+            var p_e_w_choose = enemytankpath_w_choose;
+            switch (p_e_w_choose){
+
+                case 0:
+                    // 顺时针旋转5度
+                    currentSpeed = 300;
+                    for(var i=0;i<1;i++){
+                        EnemyTank.tank.angle+=5;
+                    }
+                    break;
+                case 1:
+                    // 逆时针旋转5度
+                    currentSpeed = 300;
+                    for(var i=0;i<1;i++){
+                        EnemyTank.tank.angle-=5;
+                    }
+                    break;
+                case 2:
+                    // 反方向走
+                    currentSpeed = 300;
+                    for(var i=0;i<36;i++){
+                        EnemyTank.tank.angle+=5;
+                    }
+                    break;
+                case 3:
+                    // 顺时针旋转90度
+                    currentSpeed = 300;
+                    for(var i=0;i<18;i++){
+                        EnemyTank.tank.angle+=5;
+                    }
+                    break;
+                case 4:
+                    // 逆时针旋转90度
+                    currentSpeed = 300;
+                    for(var i=0;i<18;i++){
+                        EnemyTank.tank.angle-=5;
+                    }
+                    break;
+
+            }
+
+        }
+
+
+
+        // 需传值
+        function fire(fire_choose) {
+            var a=fire_choose;
+            if (tank.alive === true) {
+                if (game.time.now > nextFire && bullets.countDead() > 0) {
+                    nextFire = game.time.now + fireRate;
+
+                    var bullet = bullets.getFirstExists(false);
+
+                    bullet.reset(turret.x, turret.y);
+
+                    switch (a) {
+                        // case 0:
+                        //     //炮筒
+                        //     bullet.rotation = game.physics.arcade.moveToPointer(bullet, 500, game.input.activePointer, 500);
+                        //     turret.rotation=bullet.rotation;
+                        //     break;
+                        //     超敌方坦克打
+                        case 0:
+                            bullet.rotation = game.physics.arcade.moveToObject(bullet,EnemyTank.tank, 1000);
+                            turret.rotation= this.game.physics.arcade.angleBetween(tank, EnemyTank.tank);
+                            break;
+                            // 一直超中间打
+                        case 1:
+                            bullet.rotation=game.physics.arcade.moveToXY(bullet,400,300,1000);
+                            turret.rotation= this.game.physics.arcade.angleToXY(turret, 400,300);
+                            break;
+
+
+
+                    }
+                    // bullet.rotation = game.physics.arcade.moveToPointer(bullet, 500, game.input.activePointer, 500);
+                    // turret.rotation=bullet.rotation;
+
+                }
+            }
+        }
+
+        function render() {
+            game.debug.text('Me: ' + tank.health, 32, 32);
+            game.debug.text('Enemy: ' + EnemyTank.health, 400, 32);
+
+        }
+
+    </script>
+</head>
+<body>
+</body>
+</html>

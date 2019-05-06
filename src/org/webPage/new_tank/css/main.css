@@ -1,0 +1,201 @@
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #cde6ff;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #cde6ff;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #cde6ff;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #cde6ff;
+}
+.board {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    line-height: 150px;
+    text-align: center;
+    /* @Key 透明度 R G B Alpha（不透明度为50%） */
+    background-color: rgba(39, 71, 94, 0.73);
+    /* @Key 圆角矩形 */
+    -moz-border-radius: 1em;
+    -webkit-border-radius: 1em;
+    border-radius: 1em;
+    /* @Key 投影 投影偏移3px，宽6px，颜色#666 */
+    -webkit-box-shadow: 3px 3px 50px #79a6cc;
+    -moz-box-shadow: 3px 3px 50px #79a6cc;
+    box-shadow: 3px 3px 50px #79a6cc;
+}
+.board_login_register{
+    /*登陆和注册*/
+    width: 70%;
+    height: 70%;
+
+    margin-left: -35%;
+    margin-top: -20%;
+}
+.board_main{
+    /*组装坦克*/
+    width: 90%;
+    /*height: 90%;*/
+
+    margin-left: -46%;
+    margin-top: -27%;
+}
+.user_info{
+    width: 200px;
+    height: 70px;
+    position: relative;
+    left: 10px;
+    top: 10px;
+    text-align: center;
+    margin: 0%;
+    /* @Key 透明度 R G B Alpha（不透明度为50%） */
+    background-color: rgba(39, 71, 94, 0.73);
+    /* @Key 圆角矩形 */
+    -moz-border-radius: 1em;
+    -webkit-border-radius: 1em;
+    border-radius: 1em;
+    /* @Key 投影 投影偏移3px，宽6px，颜色#666 */
+    -webkit-box-shadow: 3px 3px 50px #79a6cc;
+    -moz-box-shadow: 3px 3px 50px #79a6cc;
+    box-shadow: 3px 3px 50px #79a6cc;
+}
+.user_settings{
+    font-family: Rockwell,"Apple LiGothic","American Typewriter",Georgia,"Telugu MN",Trattatello;
+    width: 150px;
+    height: 60px;
+    position: relative;
+    float: right;
+    right: 2%;
+    /*top: -10%;*/
+    margin-top: -6%;
+    text-align: center;
+    -moz-border-radius: 1em;
+    -webkit-border-radius: 1em;
+    border-radius: 1em;
+    -webkit-box-shadow: 3px 3px 50px #79a6cc;
+    -moz-box-shadow: 3px 3px 50px #79a6cc;
+    box-shadow: 3px 3px 50px #79a6cc;
+}
+.user_settings:hover{
+    background-color: rgb(184, 211, 235);
+}
+.user_storehouse{
+    width: 150px;
+    height: 60px;
+    position: relative;
+    float: left;
+    left: 25%;
+    /*margin-top: -47%;*/
+    /*top: -50%;*/
+    text-align: center;
+    /* @Key 透明度 R G B Alpha（不透明度为50%） */
+    background-color: rgba(255, 162, 111, 0.73);
+    /* @Key 圆角矩形 */
+    -moz-border-radius: 1em;
+    -webkit-border-radius: 1em;
+    border-radius: 10em;
+    /* @Key 投影 投影偏移3px，宽6px，颜色#666 */
+    -webkit-box-shadow: 3px 3px 50px #79a6cc;
+    -moz-box-shadow: 3px 3px 50px #79a6cc;
+    box-shadow: 3px 3px 50px #79a6cc;
+}
+.user_storehouse:hover{
+    background-color: rgb(184, 211, 235);
+}
+.user_shop{
+    width: 150px;
+    height: 60px;
+    position: relative;
+    left: 2%;
+    top: -5%;
+    text-align: center;
+    /* @Key 透明度 R G B Alpha（不透明度为50%） */
+    background-color: rgba(255, 162, 111, 0.73);
+    /* @Key 圆角矩形 */
+    -moz-border-radius: 1em;
+    -webkit-border-radius: 1em;
+    border-radius: 10em;
+    /* @Key 投影 投影偏移3px，宽6px，颜色#666 */
+    -webkit-box-shadow: 3px 3px 50px #79a6cc;
+    -moz-box-shadow: 3px 3px 50px #79a6cc;
+    box-shadow: 3px 3px 50px #79a6cc;
+}
+.user_shop:hover{
+    background-color: rgb(184, 211, 235);
+}
+.round_icon{
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5%;
+    display: flex;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* @Key 投影 投影偏移3px，宽6px，颜色#666 */
+    -webkit-box-shadow: 3px 3px 50px #79a6cc;
+    -moz-box-shadow: 3px 3px 50px #79a6cc;
+    box-shadow: 3px 3px 50px #79a6cc;
+    z-index: 50;
+}
+.user_name{
+    width: 140px;
+    height: 20px;
+    position: absolute;
+    margin-top: 5px;
+    margin-bottom:5px ;
+    top: -60px;
+    left: 40px;
+
+}
+.user_name {
+    font-weight:bold;
+    color:#ff9955;
+}
+.user_store{
+    width: 140px;
+    height: 20px;
+    position: absolute;
+    margin-top: 5px;
+    margin-bottom:5px ;
+    /*top: -85%;*/
+    /*left: 5%;*/
+    top: -55px;
+    left: 10px;
+    font-weight:bold;
+    font-size: 20px;
+    color: #e7dcb2;
+}
+.user_setting{
+    width: 140px;
+    height: 20px;
+    position: absolute;
+    margin-top: 8px;
+    margin-bottom:5px ;
+    top: -55px;
+    left: 10px;
+    font-weight:bold;
+    font-size: 20px;
+    color: #a9deff;
+}
+.shop{
+    width: 140px;
+    height: 20px;
+    position: absolute;
+    margin-top: 5px;
+    margin-bottom:5px ;
+    top:-82%;
+    left: 5%;
+    font-weight:bold;
+    font-size: 20px;
+    color: #e7dcb2;
+}
+
+
+

@@ -1,0 +1,188 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400&subset=latin,latin-ext);
+
+.user_storehouse_page,.user_shop_page,.user_setting_page{
+	width: 100%;
+	height: 100%;
+	background: rgba(21, 32, 51, 0.67);
+	/*overflow-y: scroll;*/
+	position: absolute;
+	top: 0%;
+	z-index: 888;
+}
+.user_storehouse_box,.user_shop_box,.user_setting_box{
+	width: 50%;
+	height: 50%;
+	/*background: #f1a007;*/
+	marin: 0 auto;
+	z-index: 1500;
+	top: 15%;
+	/*left: 25%;*/
+	/*right: 25%;*/
+	left: 12%;
+	right: 12%;
+	position: relative;
+}
+ul.tabs{
+	width: 660px;
+	height: 80px;
+	margin: 0 auto;
+	list-style: none;
+	overflow: hidden;
+	padding: 0;
+	z-index: 1500;
+}
+ul.tabs li{
+	float: left;
+	width: 130px;
+	z-index: 1500;
+
+}
+ul.tabs li a{
+	line-height: 25px;
+	position: relative;
+	display: block;
+	height: 30px;
+	margin-top: 40px;
+	padding: 10px 0 0 0;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 18px;
+    z-index: 1600;
+	text-align: center;
+	text-decoration: none;
+	color: #ffffff;
+	background: #70a5c8;
+	-webkit-box-shadow: 8px 12px 25px 2px rgba(0,0,0,0.4);
+	   -moz-box-shadow: 8px 12px 25px 2px rgba(0,0,0,0.4);
+	        box-shadow: 8px 12px 25px 2px rgba(0,0,0,0.4);
+	        	border: 0px solid #000000;
+	-webkit-transition: padding 0.2s ease, margin 0.2s ease;
+       -moz-transition: padding 0.2s ease, margin 0.2s ease;
+         -o-transition: padding 0.2s ease, margin 0.2s ease;
+        -ms-transition: padding 0.2s ease, margin 0.2s ease;
+            transition: padding 0.2s ease, margin 0.2s ease;
+}
+.tabs li:first-child a{
+	z-index: 5000;
+  -webkit-border-top-left-radius: 8px;
+-moz-border-radius-topleft: 8px;
+border-top-left-radius: 8px;
+}
+.tabs li:nth-child(2) a{
+	z-index: 4000;
+}
+.tabs li:nth-child(3) a{
+	z-index: 3000;
+}
+.tabs li:nth-child(4) a{
+	z-index: 2000;
+}
+.tabs li:last-child a  {
+	z-index: 1800;
+  -webkit-box-shadow: 2px 8px 25px -2px rgba(0,0,0,0.3);
+	   -moz-box-shadow: 2px 8px 25px -2px rgba(0,0,0,0.3);
+	        box-shadow: 2px 8px 25px -2px rgba(0,0,0,0.3);
+  -webkit-border-top-right-radius: 8px;
+-moz-border-radius-topright: 8px;
+border-top-right-radius: 8px;
+}
+
+ul.tabs li a:hover {
+	margin: 35px 0 0 0;
+	padding: 10px 0 5px 0;
+}
+ul.tabs li a.active{
+	margin: 30px 0 0 0;
+	padding: 10px 0 10px 0;
+	background: #465e73;
+	color: #70a5c8;
+	/*color: #ff6831;*/
+	z-index: 9999;
+	outline: none;
+}
+.group:before,
+.group:after{
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+.group:after{
+    clear: both;
+}
+#storehouse_content,#shop_content,#setting_content {
+  width: 650px;
+  height: 200px;
+  margin: 0 auto;
+
+  background: #465e73;
+-webkit-box-shadow: 2px 8px 25px -2px rgba(0,0,0,0.3);
+   	   -moz-box-shadow: 2px 8px 25px -2px rgba(0,0,0,0.3);
+   	        box-shadow: 2px 8px 25px -2px rgba(0,0,0,0.3);
+  -webkit-border-bottom-right-radius: 8px;
+-webkit-border-bottom-left-radius: 8px;
+-moz-border-radius-bottomright: 8px;
+-moz-border-radius-bottomleft: 8px;
+border-bottom-right-radius: 8px;
+border-bottom-left-radius: 8px;
+}
+.storehouse_goods,.shop_goods{
+	margin: 0;
+}
+#storehouse_pedrail_goods_1,
+#storehouse_pedrail_goods_2,
+#storehouse_pedrail_goods_3,
+#storehouse_pedrail_goods_4,
+
+#storehouse_body_goods_1,
+#storehouse_aim_goods_1,
+#storehouse_turret_goods_1,
+#storehouse_weapon_goods_1,
+
+#shop_pedrail_goods_1,
+#shop_pedrail_goods_2,
+#shop_pedrail_goods_3,
+#shop_pedrail_goods_4,
+
+#shop_body_goods_1,
+#shop_aim_goods_1,
+#shop_turret_goods_1,
+#shop_weapon_goods_1,
+
+#setting_account_goods_1,
+#setting_voice_goods_1,
+#setting_screen_goods_1,
+#setting_service_goods_1,
+#setting_help_goods_1
+{
+	width: 20%;
+	height: 50%;
+	float: left;
+	left: 2%;
+	border: 2px;
+	color: #a9deff;
+
+}
+
+
+.storehouse_goods_box{
+	width: 100%;
+	height: 100%;
+	/*height: 20%;*/
+	overflow-y: scroll;
+	/*background-color: #df6659;*/
+	z-index: 6000;
+}
+
+#storehouse_pedrail_goods_box{
+
+}
+#storehouse_body_goods_box{
+
+}
+#storehouse_aim_goods_box{
+
+}
+#storehouse_turret_goods_box{
+
+}
+#storehouse_weapon_goods_box{
+
+}
