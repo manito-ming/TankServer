@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="../login/jquery-3.3.1.js"></script>
+    <script src="../login/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="../login/login_register.css">
+
+
+    <style type="text/css">
+        body{
+            width: 100%;
+            height: 100%;
+            /*background-image: url("../tank_2.jpg");*/
+            background-image: url("../login/tank01.jpeg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        html{
+            width: 100%;
+            height: 100%;
+        }
+        form {
+            padding: 20% 0;
+            position: relative;
+            z-index: 2;
+        }
+
+    </style>
+</head>
+<body>
+<div class="board" >
+    <div>
+        <form class="from" name="login_form" action="" method="post">
+            <input type="text" id="account" class="account" placeholder="Account">
+            <!--<input type="text" id="username" placeholder="Username">-->
+            <input type="password" id="password" class="password" placeholder="Password">
+            <!--onclick="window.open('composing_room.html')"-->
+            <button type="button" id="login_button" onclick="window.open('composing_room.html')">Login</button>
+            <button type="button" id="registe_button" onclick="window.open('register.html')">Register</button>
+            <div></div>
+            <span id="msg"></span>
+        </form>
+    </div>
+</div>
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            $("#login_button").click(function login(){
+                var account=$("#account").val();
+                var password=$("#password").val();
+                if(account==""||password==""){
+                    alert("Empty account or password ！")
+                }
+
+                else {
+                    $.ajax({
+                        type: "post",        // 通过 POST 读取的页面不被缓存
+                        url: "/log",             //规定把请求发送到哪个 URL。
+                        dataType: "json",    //规定预期的服务器响应的数据类型。
+                        data:{'account':$("#account").val(),'password':$("#password").val()},   //规定连同请求发送到服务器的数据。
+                        async: true,
+                        success: function (msg_login) {//请求成功时执行的回调函数。
+                            if (msg_login['status']==="1"){
+
+                                localStorage.setItem("account",account);
+
+                                window.location.href = "composing_room.html";
+
+                            }
+                            else if(msg_login['status']==="0"){
+                                alert("Your account or password is wrong！");
+                            }
+                        },
+                        error:function(){
+                            alert("Your account or password is wrong！");
+                        }
+                    });
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

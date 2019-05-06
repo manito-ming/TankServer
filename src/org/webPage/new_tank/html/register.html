@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../register/jquery-3.3.1.min.js"></script>
+    <script src="../register/jquery-2.1.1.min.js"></script>
+    <script src="../register/jquery-3.3.1.js"></script>
+    <script src="../register/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="../register/login_register.css">
+    <style type="text/css">
+        body{
+            width: 100%;
+            height: 100%;
+            /*background-image: url("../tank_2.jpg");*/
+            background-image: url("../register/tank01.jpeg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+
+        }
+        html{
+            width: 100%;
+            height: 100%;
+        }
+        form {
+            padding: 10% 0;
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+<div class="board" >
+    <div>
+        <form class="from">
+            <input type="text" id="account" placeholder="Account">
+            <input type="text" id="username" placeholder="Username">
+            <input type="text" id="phone_num" placeholder="Phone_num">
+            <!--<input type="text" id="email" placeholder="Email">-->
+            <input type="password" id="password" placeholder="Password">
+            <input type="password" id="repassword" placeholder="PasswordAgain">
+            <button type="submit" id="confirm-button" >Confirm</button>
+            <button type="submit" id="exit-button" onclick="window.open('login.html')">Exit</button>
+
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+
+
+
+    //验证手机号码格式
+    function isPhoneNo(phone) {
+        var pattern = /^1[34578]\d{9}$/;
+        return pattern.test(phone);
+    }
+    // //验证身份证
+    // function isCardNo(card) {
+    //     var pattern = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+    //     return pattern.test(card);
+    // }
+    // // 验证中文名称
+    // function isChinaName(name) {
+    //     var pattern = /^[\u4E00-\u9FA5]{1,6}$/;
+    //     return pattern.test(name);
+    // }
+
+
+    $(document).ready(function () {
+        $("#confirm-button").click(function register(){
+            var account=$("#account").val();
+            var username=$("#username").val();
+            var phone_num=$("#phone_num").val();
+            var password=$("#password").val();
+            var repassword=$("#repassword").val();
+
+            if(account===""||username===""||phone_num===""||password===""||repassword===""){
+                alert("please enter complete message！")
+
+            }
+            else if (password!==repassword){
+                alert("The 2 passwords are differ !")
+            }
+            else if(isPhoneNo($.trim($('#phone_num').val()) ===false)){
+                alert("Your phone number is wrong！");
+                $('#phone_num').focus();
+            }
+            else {
+                $.ajax({
+                    type: "post",        // 通过 POST 读取的页面不被缓存
+                    url: "http://localhost:9999/register/msg",             //规定把请求发送到哪个 URL。
+                    dataType: "json",    //规定预期的服务器响应的数据类型。
+                    data:{
+                        'account':$("#account").val(),//规定连同请求发送到服务器的数据。
+                        'username':$("#username").val(),
+                        'phone_num':$("#phone_num").val(),
+                        'password':$("#password").val(),
+                        'repassword':$("#repassword").val()
+                    },
+                    async: true,
+                    success: function (msg_sign) {//请求成功时执行的回调函数。
+                        if (msg_sign['status']==="1"){
+
+                            window.location.href = "composing_room.html";
+                        }
+                        else if(msg_sign['status']=="0"){
+                            alert("Account is Exists！");
+                        }
+                    },
+                    error:function(){
+                        alert("Please try again！");
+                    }
+                });
+            }
+        });
+    });
+
+
+
+</script>
+</body>
+</html>

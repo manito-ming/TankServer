@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../hall/jquery-3.3.1.min.js"></script>
+    <script src="../hall/jquery-2.1.1.min.js"></script>
+    <script src="../hall/jquery-3.3.1.js"></script>
+    <script src="../hall/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="../hall/main.css">
+    <link rel="stylesheet" type="text/css" href="../hall/composing_room.css">
+
+    <style type="text/css">
+        body{
+            width: 100%;
+            height: 100%;
+            /*background-image: url("../tank_2.jpg");*/
+            background-image: url("../hall/tank01.jpeg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+
+        }
+        html{
+            width: 100%;
+            height: 100%;
+        }
+     .room{
+         /*clear: both;*/
+
+         /*border-top: 1px solid gainsboro;*/
+         /*display: none;*/
+         width: 50%;
+         height: 100%;
+         position: relative;
+         z-index: 100;
+
+
+
+         /* @Key 透明度 R G B Alpha（不透明度为50%） */
+         background-color: rgba(205, 106, 10, 0.73);
+         /* @Key 圆角矩形 */
+         -moz-border-radius: 1em;
+         -webkit-border-radius: 1em;
+         border-radius: 1em;
+         /* @Key 投影 投影偏移3px，宽6px，颜色#666 */
+         -webkit-box-shadow: 3px 3px 50px #79a6cc;
+         -moz-box-shadow: 3px 3px 50px #79a6cc;
+         box-shadow: 3px 3px 50px #79a6cc;
+     }
+    </style>
+</head>
+<body>
+<div class="board" >
+    <div class="user_info">
+        <div class="head_image">
+            <img class="round_icon" src="../hall/head_image_boy.jpeg" width="60px" height="60px" >
+        </div>
+        <div class="user_name" id="user_name">
+            <span class="user_name_font" id="username">Username</span>
+        </div>
+    </div>
+
+    <!--仓库-->
+    <div class="user_storehouse">
+        <div class="user_store" id="user_store">
+            <span class="store" id="store">仓库</span>
+        </div>
+    </div>
+
+    <div class="setting_box">
+        <button type="submit" id="setting_btn" class="setting_btn">Setting</button>
+    </div>
+
+    <div>
+        <div class="img_box">
+            <img class="tank_show" id="tank_show" src="../hall/tank_mode0.png">
+        </div>
+        <div class="select_room">
+            <button type="submit" id="select_room_btn" class="select_room_btn" >Match the room</button>
+        </div>
+        <div class="room" >
+
+        </div>
+    </div>
+
+
+    <!--商店-->
+    <div class="user_shop">
+        <div class="shop" id="shop">
+            <span class="shop_" id="shop_">商店</span>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        //从后端获得用户名
+        $.ajax({
+            type:"post",
+            url: "/hall/msg",             //规定把请求发送到哪个 URL。
+            dataType: "json",
+            async: true,
+            success:function (username) {
+                var user=username['uname'];
+                $("#username").html(user)
+            }
+        });
+
+        // 点击按钮匹配跳转
+        $("#select_room_btn").click(function select_room() {
+              $.ajax({
+                  type: "post",        // 通过 POST 读取的页面不被缓存
+                  url: "/please_wait.html",             //规定把请求发送到哪个 URL。
+                  dataType: "html",
+                  async: true,
+                  success:function () {
+                      window.location.href = "please_wait.html";
+                  },
+                  error:function () {
+                      alert("请重试")
+                  }
+              })
+
+
+        });
+
+    })
+</script>
+</body>
+</html>

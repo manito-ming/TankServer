@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../wait/jquery-3.3.1.min.js"></script>
+    <script src="../wait/jquery-2.1.1.min.js"></script>
+    <script src="../wait/jquery-3.3.1.js"></script>
+    <script src="../wait/jquery-ui.js"></script>
+    <style>
+        body{
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+
+        }
+        html{
+            width: 100%;
+            height: 100%;
+        }
+        /*加载蒙版css*/
+        .loading{
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            background-color: #E2F6FB;
+            top: 0px;
+            left: 0px;
+            z-index: 1;
+        }
+        /*等待进度小css*/
+        .loading .samllpic{
+            width: 100%;
+            height: 20%;
+            background-image: url("../wait/bigSpinner.gif");
+            background-repeat: no-repeat;
+            background-position: center;
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            right: 0px;
+            left: 0px;
+            margin: auto;
+            align-content: center;
+        }
+        #sp{
+            width: 100%;
+            height: 20%;
+            left: 50%;
+            top: 51%;
+            position: absolute;
+            margin: auto;
+            align-content: center;
+            font-size: 80%;
+            color: #307fd2;
+        }
+
+    </style>
+</head>
+<body>
+<div class="board">
+    <div class="loading">
+
+        <div class="samllpic">
+        </div>
+       <span id="sp">Matching...</span>
+    </div>
+</div>
+</body>
+
+<script>
+
+    // if(!window.WebSocket){
+    //
+    //     window.WebSocket = window.MozWebSocket;
+    // }
+    //
+    // if(window.WebSocket) {
+    //     socket = new WebSocket("ws://localhost:7397/websocket");
+    //
+    //     socket.onopen = function(event){
+    //
+    //         socket.send("a");
+    //     };
+    //
+    //     socket.onmessage = function(event){
+    //         console.log(event.data);
+    //         var te= event.data;
+    //         var a = eval('(' + te + ')');
+    //         console.log("a.a    "+a.a);
+    //         if(a.a===2) {
+    //             //   socket.send("b");
+    //
+    //             console.log("success");
+    //             $(document).ready(function () {
+    //
+    //                 $.ajax({
+    //                     type: "post",
+    //                     url: "/assemble_tank.html",
+    //                     dataType: "html",
+    //                     async: true,
+    //                     success: function () {
+    //                         window.location.href = "assemble_tank.html";
+    //                     }
+    //                 });
+    //             })
+    //         }
+    //     };
+    //
+    // }
+
+
+
+
+
+
+    $(document).ready(function () {
+        var account=localStorage.getItem("account");
+        $.ajax({
+            type: "post",        // 通过 POST 读取的页面不被缓存
+            url: "/jump",             //规定把请求发送到哪个 URL。
+            dataType: "json",    //规定预期的服务器响应的数据类型。
+            data:{
+                'account':account
+            },
+            async: true,
+            success: function (msg_login) {//请求成功时执行的回调函数。
+                if (msg_login['status']==="1"){
+                    localStorage.setItem("roomid",msg_login['roomid']);
+
+                    window.location.href = "composing_room.html";
+                } if (msg_login['status']==="2"){
+                    localStorage.setItem("roomid",msg_login['roomid']);
+
+                    window.location.href = "assemble_tank.html";
+                }
+            },
+
+        });
+
+    });
+
+
+
+</script>
+</html>

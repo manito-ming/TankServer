@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../assemble/jquery-3.3.1.min.js"></script>
+    <script src="../assemble/jquery-2.1.1.min.js"></script>
+    <script src="../assemble/jquery-3.3.1.js"></script>
+    <script src="../assemble/jquery-ui.js"></script>
+    <!--<script type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>-->
+    <style type="text/css">
+        body{
+            width: 100%;
+            height: 100%;
+            /*background-image: url("../tank_2.jpg");*/
+            background-image: url("../assemble/tank01.jpeg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+
+        }
+        html{
+            width: 100%;
+            height: 100%;
+        }
+        .msg_bar{
+            width: 30%;
+            height: 70%;
+        }
+        .user_info{
+            width: 13%;
+            height: 9%;
+            position: absolute;
+            left: 1%;
+            top: 1%;
+            bottom: 1%;
+            text-align: center;
+            /* @Key 透明度 R G B Alpha（不透明度为50%） */
+            background-color: rgba(39, 71, 94, 0.73);
+            /* @Key 圆角矩形 */
+            -moz-border-radius: 1em;
+            -webkit-border-radius: 1em;
+            border-radius: 1em;
+            /* @Key 投影 投影偏移3px，宽6px，颜色#666 */
+            -webkit-box-shadow: 3px 3px 50px #79a6cc;
+            -moz-box-shadow: 3px 3px 50px #79a6cc;
+            box-shadow: 3px 3px 50px #79a6cc;
+        }
+        .round_icon{
+            width: 30%;
+            height: 80%;
+            position: absolute;
+            margin-top: 3%;
+            margin-bottom: 3%;
+            margin-left: 5%;
+            display: flex;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            /* @Key 投影 投影偏移3px，宽6px，颜色#666 */
+            -webkit-box-shadow: 3px 3px 50px #79a6cc;
+            -moz-box-shadow: 3px 3px 50px #79a6cc;
+            box-shadow: 3px 3px 50px #79a6cc;
+            z-index: 50;
+        }
+        .user_name{
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            display: flex;
+            width: 80%;
+            height: 50%;
+            position: absolute;
+            margin-top: 5%;
+            margin-bottom:5%;
+            top: 0%;
+            left: 20%;
+            font-size: 80%;
+
+        }
+        .user_name {
+            font-weight:bold;
+            color:#ff9955;
+        }
+        .assembly{
+            width: 10%;
+
+            position: absolute;
+            left: 1%;
+            top: 12%;
+            bottom: 5%;
+            text-align: center;
+            /* @Key 透明度 R G B Alpha（不透明度为50%） */
+            background-color: rgba(39, 71, 94, 0.73);
+            /* @Key 圆角矩形 */
+            -moz-border-radius: 1em;
+            -webkit-border-radius: 1em;
+            border-radius: 1em;
+            /* @Key 投影 投影偏移3px，宽6px，颜色#666 */
+            -webkit-box-shadow: 3px 3px 50px #79a6cc;
+            -moz-box-shadow: 3px 3px 50px #79a6cc;
+            box-shadow: 3px 3px 50px #79a6cc;
+        }
+        .assembly_icon{
+            margin-top: 1%;
+            margin-bottom: 1%;
+            padding-top: 1%;
+            padding-bottom: 10%;
+        }
+        .assembly_icon span{
+            color: #97cfff;
+        }
+
+
+
+
+
+        .right_side_box{
+            width: 60%;
+            height: 85%;
+            position: absolute;
+            right: 0%;
+            top: 0%;
+            bottom: 5%;
+            text-align: center;
+            float: right;
+            /* @Key 透明度 R G B Alpha（不透明度为50%） */
+            /*background-color: rgba(94, 18, 31, 0.73);*/
+            /* @Key 圆角矩形 */
+            -moz-border-radius: 1em;
+            -webkit-border-radius: 1em;
+            border-radius: 1em;
+
+        }
+        #code_box{
+            width: 100%;
+            height: 90%;
+            float: top;
+            background-color: rgba(39, 71, 94, 0.73);
+            /* @Key 投影 投影偏移3px，宽6px，颜色#666 */
+            -webkit-box-shadow: 3px 3px 50px #79a6cc;
+            -moz-box-shadow: 3px 3px 50px #79a6cc;
+            box-shadow: 3px 3px 50px #79a6cc;
+        }
+        .side_button{
+            background-color: rgba(50, 89, 115, 0.73);
+            width:100%;
+            height: 7%;
+            float: bottom;
+            margin-right: 0%;
+            /*margin-top: -100%;*/
+            -webkit-border-bottom-left-radius:1em;
+            -moz-border-bottom-left-radius:1em;
+            -webkit-border-bottom-right-radius:1em;
+            -moz-border-bottom-right-radius:1em;
+
+            -webkit-box-shadow: 3px 3px 50px #79a6cc;
+            -moz-box-shadow: 3px 3px 50px #79a6cc;
+            box-shadow: 3px 3px 50px #79a6cc;
+        }
+        .down{
+            padding-left: 50%;
+            padding-right: 50%;
+            padding-top: 1%;
+            padding-bottom: 1%;
+        }
+        .hide{
+            display: none;
+        }
+        .button{
+            width: 60%;
+            height: 8%;
+            position: absolute;
+            right: 0%;
+            top: 85%;
+            bottom: 10%;
+            float: right;
+            -moz-border-radius: 1em;
+            -webkit-border-radius: 1em;
+            border-radius: 1em;
+            -webkit-box-shadow: 3px 3px 50px #79a6cc;
+            -moz-box-shadow: 3px 3px 50px #79a6cc;
+            box-shadow: 3px 3px 50px #79a6cc;
+            z-index: 0;
+        }
+        .submit_code_btn,.ready_btn{
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            outline: 0;
+            background-color:  #c9e1f7;
+            border: 0;
+            padding: 10px 15px;
+            margin: 0 auto 10px auto;
+            color: rgba(255, 247, 202, 0.73);
+            border-radius: 3px;
+            width: 200px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            -webkit-transition-duration: 0.25s;
+            transition-duration: 0.25s;
+            background-color: rgb(219, 150, 106);
+            font-family: Rockwell,"Apple LiGothic","American Typewriter",Georgia,"Telugu MN",Trattatello;
+            -webkit-box-shadow: 3px 3px 50px #79a6cc;
+            -moz-box-shadow: 3px 3px 50px #79a6cc;
+            box-shadow: 3px 3px 50px #79a6cc;
+        }
+        .submit_code_btn{
+            position: absolute;
+            float: left;
+            top: 5%;
+            left: 5%;
+            bottom: 5%;
+        }
+        .ready_btn{
+            position: absolute;
+            float: right;
+            top: 5%;
+            right:5%;
+            bottom: 5%;
+        }
+        .submit_code_btn:hover,.ready_btn:hover{
+            background-color: rgb(184, 211, 235);
+        }
+    </style>
+    <style type="text/css">
+        #codeTextarea{color: white}
+        .textAreaWithLines{font-family: courier;border: 0px solid #2e76a2;}
+        .textAreaWithLines textarea,.textAreaWithLines div{border: 0px;line-height: 120%;font-size: 12px;}
+        .lineObj{color: #97cfff;}
+    </style>
+    <style>
+        #rgtank_choose{
+            position: relative;
+            /*width: 40%;*/
+            /*height: 20%;*/
+            /*float: top;*/
+            width: 200px;
+            height: 100px;
+            right: 60%;
+            left: 15%;
+            top: 50%;
+        }
+        .tank_choose {
+            -webkit-appearance: none; /* remove default */
+            display: inline-block;
+            vertical-align: baseline;
+            margin: 0px;
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            cursor: pointer;
+
+            box-shadow: hsla(207, 29%, 43%, 0.15) 0 1px 1px, inset hsla(210, 29%, 42%, 0.5) 0 0 0 1px;
+            background-color: hsla(204, 41%, 26%, 0.77);
+            background-image: -webkit-radial-gradient( hsl(201, 100%, 92%) 0%, hsla(200,100%,70%,1) 15%, hsla(200, 100%, 60%, 0.5) 28%, hsla(203, 100%, 50%, 0) 70% );
+            background-repeat: no-repeat;
+            -webkit-transition: background-position .15s cubic-bezier(.8, 0, 1, 1),
+            -webkit-transform .25s cubic-bezier(.8, 0, 1, 1);
+        }
+        .tank_choose:checked {
+            -webkit-transition: background-position .2s .15s cubic-bezier(0, 0, .2, 1),
+            -webkit-transform .25s cubic-bezier(0, 0, .2, 1);
+        }
+        .tank_choose:active {
+            -webkit-transform: scale(1.5);
+            -webkit-transition: -webkit-transform .1s cubic-bezier(0, 0, .2, 1);
+        }
+
+        /* The up/down direction logic */
+
+        .tank_choose,
+        .tank_choose:active {
+            background-position: 0 40px;
+        }
+        .tank_choose:checked {
+            background-position: 0 0;
+        }
+        .tank_choose:checked ~ .tank_choose,
+        .tank_choose:checked ~ .tank_choose:active {
+            background-position: 0 -40px;
+        }
+        #green_tank,#red_tank{
+            color: #396388;
+            font-size: 30px;
+        }
+    </style>
+
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            $("#down").click(function () {
+                $("#code_box").slideToggle(700);
+            })
+        })
+
+    </script>
+    <script type="text/javascript">
+        var lineObjOffsetTop = 2;
+        function createTextAreaWithLines(id)
+        {
+            var el = document.createElement('DIV');
+            var ta = document.getElementById(id);
+            ta.parentNode.insertBefore(el,ta);
+            el.appendChild(ta);
+            el.className='textAreaWithLines';
+            el.style.width = (ta.offsetWidth + 100) + '%';
+            ta.style.position = 'absolute';
+            ta.style.left = '5%';
+            el.style.height = (ta.offsetHeight + 100) + '%';
+            el.style.overflow='hidden';
+            el.style.position = 'relative';
+            el.style.width = (ta.offsetWidth + 100) + '5';
+            var lineObj = document.createElement('DIV');
+            lineObj.style.position = 'absolute';
+            lineObj.style.top = lineObjOffsetTop + '%';
+            lineObj.style.left = '0px';
+            lineObj.style.width = '5%';
+            el.insertBefore(lineObj,ta);
+            lineObj.style.textAlign = 'right';
+            lineObj.className='lineObj';
+            var string = '';
+            for(var no=1;no<10000;no++){
+                if(string.length>0)string = string + '<br>';
+                string = string + no;
+            }
+            ta.onkeydown = function() { positionLineObj(lineObj,ta); };
+            ta.onmousedown = function() { positionLineObj(lineObj,ta); };
+            ta.onscroll = function() { positionLineObj(lineObj,ta); };
+            ta.onblur = function() { positionLineObj(lineObj,ta); };
+            ta.onfocus = function() { positionLineObj(lineObj,ta); };
+            ta.onmouseover = function() { positionLineObj(lineObj,ta); };
+            lineObj.innerHTML = string;
+        }
+        function positionLineObj(obj,ta)
+        {
+            obj.style.top = (ta.scrollTop * -1 + lineObjOffsetTop) + 'px';
+        }
+    </script>
+
+</head>
+<body>
+<div>
+    <!--左边的用户信息&坦克部件-->
+    <div class="msg_bar">
+        <!--头像&用户名-->
+        <div class="user_info">
+            <div class="head_image">
+                <img class="round_icon" src="../assemble/head_image_boy.jpeg" width="60px" height="60px" >
+            </div>
+            <div class="user_name" id="user_name">
+                <span class="user_name_font" id="username">Username</span>
+            </div>
+        </div>
+
+        <div class="assembly">
+            <div class="assembly_icon">
+                <div class="tank_as">
+                    <img src="../assemble/tank_pedrail.png"
+                              width="80%"
+                              height="100%"
+
+                              onclick="changeType(this.id)"
+                              id="pedrail">
+                </div>
+                <span>履带</span>
+            </div>
+            <div class="assembly_icon">
+                <div class="tank_as">
+                    <img src="../assemble/tank_body.png"
+                             width="80%"
+                             height=100%"
+                             style="margin: 2%;"
+                             onclick="changeType(this.id)"
+                             id="tank_body">
+                </div>
+                <span>车体</span>
+            </div>
+            <div class="assembly_icon">
+                <div class="tank_as">
+                    <img src="../assemble/tank_aim.png"
+                             width="80%"
+                             height="100%"
+                             style="margin: 4px;"
+                             onclick="changeType(this.id)"
+                             id="tank_aim">
+                </div>
+                <span>瞄准</span>
+            </div>
+            <div class="assembly_icon">
+                <div class="tank_as">
+                    <img src="../assemble/tank_turret.png"
+                             width="80%"
+                             height="100%"
+                             style="margin: 4px;"
+                             onclick="changeType(this.id)"
+                             id="turret">
+                </div>
+                <span>炮塔</span>
+            </div>
+            <div class="assembly_icon">
+                <div class="tank_as">
+                    <img src="../assemble/tank_weapon.png"
+                             width="80%"
+                             height="100%"
+                             style="margin: 4px;"
+                             onclick="changeType(this.id)"
+                             id="weapon">
+                </div>
+                <span>武器</span>
+            </div>
+        </div>
+
+        <div class="select_tank_pedrail">
+
+        </div>
+    </div>
+
+
+
+
+    <!--选择坦克-->
+
+    <div id="rgtank_choose" style="width:350px;margin-right: 0px" >
+        <!--绿色-->
+        <input class="tank_choose" id="tank_choose_green" type="radio" name="name" value="1" />
+        <!--<p class="tank_choose_text">绿方坦克</p>-->
+        <!--<label for="tank_choose_green">绿方坦克</label>-->
+        <span for="tank_choose_green" id="green_tank">绿方坦克</span>
+        <!--红色-->
+        <input class="tank_choose" id="tank_choose_red" type="radio" name="name" value="2"/>
+        <!--<p class="tank_choose_text">红方坦克</p>-->
+        <!--<label for="tank_choose_red">红方坦克</label>-->
+        <span for="tank_choose_red" id="red_tank">红方坦克</span>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!--右边的代码区-->
+    <div class="right_side_box">
+        <div id="code_box" class="hide">
+            <!--<form >-->
+                <!--<textarea id="codeTextarea" >22222222</textarea>-->
+            <!--</form>-->
+
+            <textarea id="codeTextarea" style="background: transparent;border-style: none;width: 100%;height: 100%">
+# coding=UTF-8
+class Tank():
+    #tank初始化
+    def __init__(self,name,fire):
+        self.name=name
+        self.fire=fire
+        print("fire="+self.fire)
+
+    #tank运动方法：顺时针旋转５°
+    def run_1(self,situation):
+        print(situation + "=0")
+
+    #tank运动方法：逆时针旋转５°
+    def run_2(self,situation):
+        print(situation + "=1")
+
+    # tank运动方法：反向走
+    def run_3(self,situation):
+        print(situation + "=2")
+
+    # tank运动方法：顺时针旋转90°
+    def run_4(self,situation):
+        print(situation + "=3")
+
+# 我方tank撞到岩石
+tank_crash_stone=True
+
+# 我方tank撞到边界
+tank_crash_border=True
+
+# 我方tank撞到敌方tank
+tank_crash_enemy=True
+
+# 为你的tank起个名字，同时定义开火方式，0:向敌方开火,1:向中间开火
+mytank=Tank('mytank','0')
+
+# 当我方tank撞到边界
+if(tank_crash_border):
+    mytank.run_2("tank_crash_border")
+
+# 当我方tank撞到岩石
+if(tank_crash_stone):
+    mytank.run_3("tank_crash_stone")
+
+# 当我方tank撞到敌方tank
+if(tank_crash_enemy):
+    mytank.run_2("tank_crash_enemy")
+            </textarea>
+
+        </div>
+        <div class="side_button" id="side_button">
+            <!--<p style="color: white" id="down">下拉</p>-->
+            <!--<p style="color: white" id="up" class="hide">上拉</p>-->
+            <img src="../assemble/down.png" class="down" id="down" height="40" width="40">
+            <!--<img src="../img/up.png" class="hide" id="up" height="20px" width="20px" >-->
+        </div>
+    </div>
+
+    <!--按钮区-->
+    <div class="button">
+        <div class="code_btn">
+            <button type="submit" id="submit_code_btn" class="submit_code_btn" >提交代码</button>
+        </div>
+        <div class="ready">
+            <button type="submit" id="ready_btn" class="ready_btn" >开始比赛</button>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    createTextAreaWithLines('codeTextarea');
+</script>
+<script>
+var code0;
+var color0;
+var a;
+var c;
+var s;
+var account0=localStorage.getItem("account");
+var socket;
+
+//自定义弹框
+function Toast(msg,duration){
+duration=isNaN(duration)?3000:duration;
+var m = document.createElement('div');
+m.innerHTML = msg;
+m.style.cssText="width:60%; min-width:150px; background:#000; opacity:0.5; height:40px; color:#fff; line-height:40px; text-align:center; border-radius:5px; position:fixed; top:40%; left:20%; z-index:999999; font-weight:bold;";
+document.body.appendChild(m);
+setTimeout(function() {
+var d = 0.5;
+m.style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in';
+m.style.opacity = '0';
+setTimeout(function() { document.body.removeChild(m) }, d * 1000);
+}, duration);
+}
+
+
+$(document).ready(function () {
+var radio_val = $('input:radio[name="name"]:checked').val();
+localStorage.setItem("radio", radio_val);
+
+
+//     socket.onmessage = function (event) {
+//     var te = event.data;
+//     a = eval('(' + te + ')');
+//     c=a.b;
+//     console.log("a.b ---------------------------------------->   " + a.b);
+//     console.log("c------------------------------------------->"+c);
+// }
+
+
+$.ajax({
+type: "post",
+url: "/hall/msg",             //规定把请求发送到哪个 URL。
+dataType: "json",
+data: {
+'account': localStorage.getItem("account")
+},
+async: true,
+success: function (username) {
+var user = username['uname'];
+$("#username").html(user)
+}
+});
+
+$("#submit_code_btn").click(function pull_code() {
+var radio_val = $('input:radio[name="name"]:checked').val();
+var code = $("#codeTextarea").val();
+    console.log(code);
+var code0=code;
+localStorage.setItem("radio", radio_val);
+color0 = localStorage.getItem("radio");
+console.log(radio_val);
+// socket = new WebSocket("ws://localhost:7397/websocket");
+
+s = "account0=" + account0 + ";color0=" + color0 + ";code0&" + code0;
+$.ajax({
+type: "post",
+url: "/upload",
+dataType: "json",
+data:{
+"account0":account0,
+"color0":color0,
+"code0":code0
+},
+
+async: true,
+success: function (msg_login) {
+
+if (msg_login['status']==="1"){
+Toast("上传代码成功！")
+} if (msg_login['status']==="2"){
+Toast("上传代码失败，请重试！")
+}
+},
+
+});
+});
+
+
+$("#ready_btn").click(function turn_battle() {
+
+$(document).ready(function () {
+$.ajax({
+type: "post",        // 通过 POST 读取的页面不被缓存
+url: "/jump",             //规定把请求发送到哪个 URL。
+dataType: "json",    //规定预期的服务器响应的数据类型。
+async: true,
+success: function (msg_login) {//请求成功时执行的回调函数。
+
+// socket.onclose = function () {
+//     socket.close();
+//     // alert("连接已关闭...");
+// };
+if (msg_login['status']==="1"){
+// if(jsonData.status==="1"){
+window.location.href = "composing_room.html";
+} if (msg_login['status']==="2"){
+window.location.href = "battle_platform.html";
+}
+},
+
+});
+
+});
+
+
+
+
+})
+
+}
+)
+</script>
+</body>
+</html>

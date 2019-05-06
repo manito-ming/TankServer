@@ -1,0 +1,90 @@
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #cde6ff;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #cde6ff;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #cde6ff;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #cde6ff;
+}
+.board {
+    width: 70%;
+    height: 70%;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    margin-left: -35%;
+    margin-top: -20%;
+    line-height: 150px;
+    text-align: center;
+    /* @Key 透明度 R G B Alpha（不透明度为50%） */
+    background-color: rgba(39, 71, 94, 0.73);
+    /* @Key 圆角矩形 */
+    -moz-border-radius: 1em;
+    -webkit-border-radius: 1em;
+    border-radius: 1em;
+    /* @Key 投影 投影偏移3px，宽6px，颜色#666 */
+    -webkit-box-shadow: 3px 3px 50px #79a6cc;
+    -moz-box-shadow: 3px 3px 50px #79a6cc;
+    box-shadow: 3px 3px 50px #79a6cc;
+}
+/*form {*/
+    /*padding: 20% 0;*/
+    /*position: relative;*/
+    /*z-index: 2;*/
+/*}*/
+form input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: 0;
+    border: 1px solid rgba(161, 196, 226, 0.4);
+    background-color: rgba(197, 215, 232, 0.2);
+    width: 250px;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin: 0 auto 15px auto;
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    -webkit-transition-duration: 0.25s;
+    transition-duration: 0.25s;
+    font-weight: 300;
+}
+form input:hover {
+    background-color: rgba(184, 211, 242, 0.39);
+}
+form input:focus {
+    background-color: white;
+    width: 300px;
+    color: #347092;
+}
+form button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: 0;
+    background-color: white;
+    border: 0;
+    padding: 10px 15px;
+    margin: 0 auto 10px auto;
+    color: #3c7097;
+    border-radius: 3px;
+    width: 123px;
+    cursor: pointer;
+    font-size: 18px;
+    -webkit-transition-duration: 0.25s;
+    transition-duration: 0.25s;
+
+    font-family: Rockwell,"Apple LiGothic","American Typewriter",Georgia,"Telugu MN",Trattatello;
+
+
+}
+form button:hover {
+    background-color: #c9e1f7;
+}
+
